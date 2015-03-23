@@ -1,0 +1,27 @@
+{% embed 'base.twig' with {'nav_section': 5} %}
+
+    {% block surcore_header_title %}{{ post.title }}{% endblock %}
+
+    {% block surcore_header_summary_content %}By <a href="/locations-view">London</a> &middot; {{ 'now'|date('j M Y') }}{% endblock %}
+
+    {% block surcore_header_media %}
+    <figure class="section_media">
+        {{ header_media_image }}
+    </figure>
+    {% endblock %}
+
+    {% block primary_content %}
+
+        {{ post.content }}
+
+    {% endblock primary_content %}
+
+    {% block module_base %}
+
+        {% include 'helpers/share.html.twig' %}
+
+        {% include 'helpers/related_news.html.twig' with {'title': 'Latest news', 'with_images': false} %}
+
+    {% endblock module_base %}
+
+{% endembed %}

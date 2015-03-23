@@ -1,0 +1,31 @@
+{% if with_images %}
+    {% set image_layout = 'with_images' %}
+{% else %}
+    {% set image_layout = 'no_images' %}
+{% endif %}
+
+<div class="related_base">
+    {# related_title is set using 'with' in the include, as outlined in the comments below #}
+    <h3 class="related_base_title{{ ' ' ~ image_layout }}">{{ title }}</h3>
+
+    <ul class="related{{ ' ' ~ image_layout }}">
+    {% for related in relateds %}
+        <li class="related_block{{ ' ' ~ image_layout }}{% if loop.first %} first{% endif %}{% if loop.last %} last{% endif %}">
+            {% if related.thumb and with_images == true %}
+                <a href="{{ related.path }}" class="related_thumb_base">
+                    <div class="related_overlay"><span class="related_overlay_picto"></span></div>
+                    <img src="/assets/images/{{ related.thumb }}" alt="{{ related.title }}" class="related_thumb" />
+                </a>
+            {% endif %}
+
+            <h4 class="related_title"><a href="{{ related.path }}" class="related_title_wl">{{ related.title }}</a></h4>
+            {% if related.date %}
+                <time datetime="{{ related.date|date("c") }}" class="related_meta">{{ related.date|date("j F, Y") }}</time>
+            {% endif %}
+            {% if related.summary %}
+                <p class="related_summary">{{ related.summary }}</p>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+</div> <!-- End .related_base -->
